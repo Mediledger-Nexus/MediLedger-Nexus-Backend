@@ -7,9 +7,10 @@ services:
     buildCommand: |
       python -m pip install --upgrade pip && \
       pip install -r backend/requirements-minimal.txt && \
-      cd backend && pip install -e .
+      cd backend && pip install -e . && \
+      pip install gunicorn
     startCommand: |
-      cd backend && export PYTHONPATH="$(pwd)/src:$PYTHONPATH" && uvicorn mediledger_nexus.main:app --host 0.0.0.0 --port $PORT --workers 1
+      cd backend && gunicorn -c gunicorn.conf.py wsgi:application
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
