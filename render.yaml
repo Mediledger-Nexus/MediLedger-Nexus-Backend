@@ -9,7 +9,7 @@ services:
       pip install -r backend/requirements-minimal.txt && \
       cd backend && pip install -e .
     startCommand: |
-      cd backend && ./start.sh
+      cd backend && export PYTHONPATH="$(pwd)/src:$PYTHONPATH" && uvicorn mediledger_nexus.main:app --host 0.0.0.0 --port $PORT --workers 1
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
