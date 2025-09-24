@@ -6,7 +6,7 @@ import re
 from typing import Any, Dict, List, Optional, Union
 from datetime import datetime, date
 from email_validator import validate_email, EmailNotValidError
-from pydantic import BaseModel, validator
+from pydantic import BaseModel, field_validator
 
 from .constants import MEDICAL_CONSTANTS
 
@@ -282,25 +282,34 @@ class DataValidator:
 class MedicalDataValidator(BaseModel):
     """Pydantic-based medical data validator"""
     
-    @validator('email')
+    email: Optional[str] = None
+    hedera_account_id: Optional[str] = None
+    blood_type: Optional[str] = None
+    phone: Optional[str] = None
+    
+    @field_validator('email')
+    @classmethod
     def validate_email(cls, v):
-        if not DataValidator.validate_email_address(v):
+        if v and not DataValidator.validate_email_address(v):
             raise ValueError('Invalid email address')
         return v
     
-    @validator('hedera_account_id')
+    @field_validator('hedera_account_id')
+    @classmethod
     def validate_hedera_account(cls, v):
-        if not DataValidator.validate_hedera_account_id(v):
+        if v and not DataValidator.validate_hedera_account_id(v):
             raise ValueError('Invalid Hedera account ID format')
         return v
     
-    @validator('blood_type')
+    @field_validator('blood_type')
+    @classmethod
     def validate_blood_type(cls, v):
         if v and not DataValidator.validate_blood_type(v):
             raise ValueError('Invalid blood type')
         return v
     
-    @validator('phone')
+    @field_validator('phone')
+    @classmethod
     def validate_phone(cls, v):
         if v and not DataValidator.validate_phone_number(v):
             raise ValueError('Invalid phone number format')

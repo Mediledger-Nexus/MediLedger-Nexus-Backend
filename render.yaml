@@ -7,9 +7,9 @@ services:
     buildCommand: |
       python -m pip install --upgrade pip && \
       pip install -r backend/requirements-minimal.txt && \
-      pip install -e backend/
+      cd backend && pip install -e .
     startCommand: |
-      uvicorn backend.src.mediledger_nexus.main:app --host 0.0.0.0 --port $PORT --workers 1
+      cd backend && ./start.sh
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
