@@ -142,6 +142,20 @@ mediledger.db
 config/secrets.yaml
 config/production.yaml
 
+# API Keys and Secrets
+*_keys.json
+*_secrets.json
+*_credentials.json
+*_tokens.json
+*_accounts.json
+*_backup.json
+
+# Generated keys and sensitive data
+generated_keys.json
+hedera_keys.json
+test_accounts.json
+encryption_keys_backup.json
+
 # Logs
 logs/
 *.log
