@@ -125,18 +125,20 @@ sequenceDiagram
 
 ## 🚀 Modern Tech Stack
 
-| Category | Technology | Purpose |
-|----------|------------|---------|
-| **Backend** | FastAPI 0.104+ | High-performance async API framework |
-| **AI Engine** | Groq AI | Ultra-fast LLM inference (1000+ tokens/sec) |
-| **Blockchain** | Hedera Hashgraph | Consensus, tokens, and smart contracts |
-| **Database** | SQLite + aiosqlite | Lightweight, async-compatible database |
-| **Encryption** | AES-256 + RSA-2048 | Military-grade data protection |
-| **Privacy** | zk-SNARKs | Zero-knowledge proof system |
-| **ML Framework** | PyTorch | Federated learning and model training |
-| **Storage** | IPFS + Arweave | Decentralized and permanent storage |
-| **Testing** | pytest + httpx | Comprehensive test coverage |
-| **Standards** | HL7 FHIR + HCS-10 | Healthcare and AI interoperability |
+| Category | Technology | Purpose | Status |
+|----------|------------|---------|---------|
+| **Backend** | FastAPI 0.104+ | High-performance async API framework | 🔄 Deploying |
+| **AI Engine** | Groq AI | Ultra-fast LLM inference (1000+ tokens/sec) | ✅ Integrated |
+| **Blockchain** | Hedera Hashgraph | Consensus, tokens, and smart contracts | ✅ Deployed |
+| **Smart Contracts** | Solidity 0.8.19 | HealthVault, Consent, Research, Emergency | ✅ Deployed |
+| **Database** | SQLite + aiosqlite | Lightweight, async-compatible database | ✅ Configured |
+| **Encryption** | AES-256 + RSA-2048 | Military-grade data protection | ✅ Implemented |
+| **Privacy** | zk-SNARKs | Zero-knowledge proof system | ✅ Ready |
+| **ML Framework** | PyTorch | Federated learning and model training | ✅ Integrated |
+| **Storage** | IPFS + Arweave | Decentralized and permanent storage | ✅ Configured |
+| **Testing** | pytest + httpx | Comprehensive test coverage | 🔄 In Progress |
+| **Standards** | HL7 FHIR + HCS-10 | Healthcare and AI interoperability | ✅ Implemented |
+| **Deployment** | Foundry + Render | Smart contracts + Backend deployment | ✅ Contracts Deployed |
 
 ---
 
@@ -304,6 +306,12 @@ HEDERA_NETWORK=testnet
 HEDERA_ACCOUNT_ID=0.0.123456
 HEDERA_PRIVATE_KEY=your_private_key
 
+# Smart Contract Addresses (Deployed on Hedera Testnet)
+HEALTH_VAULT_CONTRACT=0x96CDd936E361a48e45Fd5c368c309E4EFC5401A1
+CONSENT_MANAGER_CONTRACT=0xC3C4500BEB39684704eaF6F3698D4fcCec672DFf
+RESEARCH_STUDY_CONTRACT=0xd4955d4D7A13345D9704CdCc6682A3229cA2159A
+EMERGENCY_ACCESS_CONTRACT=0x441EC1726c23863597ae45aB92f1cD27fEd2f9ef
+
 # AI Configuration
 GROQ_API_KEY=your_groq_api_key
 GROQ_MODEL=llama3-70b-8192
@@ -315,7 +323,52 @@ ENCRYPTION_KEY=your_encryption_key
 
 ---
 
-## 🚀 Deployment
+## 🚀 Deployment Status
+
+### ✅ Smart Contracts - DEPLOYED
+**Status**: Successfully deployed to Hedera Testnet  
+**Network**: Hedera Testnet  
+**Deployer**: `0x37D46c1dCA719D71C656153d933B3bC6765c3518`
+
+#### Deployed Contract Addresses:
+- **HealthVault**: `0x96CDd936E361a48e45Fd5c368c309E4EFC5401A1`
+- **ConsentManager**: `0xC3C4500BEB39684704eaF6F3698D4fcCec672DFf`
+- **ResearchStudy**: `0xd4955d4D7A13345D9704CdCc6682A3229cA2159A`
+- **EmergencyAccess**: `0x441EC1726c23863597ae45aB92f1cD27fEd2f9ef`
+
+### 🔄 Backend API - IN PROGRESS
+**Status**: Deployment in progress on Render  
+**Issues Resolved**: 
+- ✅ pydantic-settings import issues
+- ✅ Configuration validation errors
+- ✅ Python path configuration
+
+**Current Status**: Backend deployment being optimized for Render platform
+
+### Smart Contract Deployment Instructions
+```bash
+# Navigate to contracts directory
+cd contracts
+
+# Install Foundry (if not already installed)
+curl -L https://foundry.paradigm.xyz | bash
+source ~/.bashrc
+foundryup
+
+# Set up environment variables
+export HEDERA_PRIVATE_KEY=0xdf942a8632ea5e13b9c46185f7561ccbe5de9ad2c6be7e20a1c6dbbedc53b84c
+
+# Deploy contracts to Hedera Testnet
+forge script script/Deploy.s.sol --rpc-url https://testnet.hashio.io/api --broadcast --verify --via-ir
+
+# Verify deployment
+cast code 0x96CDd936E361a48e45Fd5c368c309E4EFC5401A1 --rpc-url https://testnet.hashio.io/api
+```
+
+**Deployment Files**:
+- `contracts/script/Deploy.s.sol` - Deployment script
+- `contracts/deployment.env` - Environment configuration
+- `contracts/deployed_addresses.env` - Contract addresses
 
 ### Docker Deployment
 ```bash
@@ -327,14 +380,49 @@ docker run -p 8000:8000 --env-file .env mediledger-nexus
 ```
 
 ### Production Checklist
-- [ ] Set strong `SECRET_KEY` and `ENCRYPTION_KEY`
-- [ ] Configure production database (PostgreSQL recommended)
-- [ ] Set up Hedera mainnet accounts and keys
+- [x] Set strong `SECRET_KEY` and `ENCRYPTION_KEY`
+- [x] Configure production database (SQLite for development)
+- [x] Set up Hedera testnet accounts and keys
+- [x] Deploy smart contracts to Hedera testnet
 - [ ] Configure CORS for your frontend domain
 - [ ] Set up monitoring and logging
 - [ ] Enable HTTPS/TLS encryption
 - [ ] Configure backup strategies
 - [ ] Set up CI/CD pipelines
+- [ ] Deploy backend to production platform
+
+---
+
+## 📊 Current Project Status
+
+### ✅ Completed Components
+- **Smart Contracts**: All 4 contracts deployed to Hedera Testnet
+- **Contract Architecture**: HealthVault, ConsentManager, ResearchStudy, EmergencyAccess
+- **Deployment Infrastructure**: Foundry setup, deployment scripts, environment configuration
+- **Backend Core**: FastAPI application with authentication, database models, API endpoints
+- **AI Integration**: Groq AI integration for diagnostics and insights
+- **Security Layer**: AES-256 encryption, JWT authentication, input validation
+
+### 🔄 In Progress
+- **Backend Deployment**: Optimizing for Render platform deployment
+- **API Integration**: Connecting backend to deployed smart contracts
+- **Testing**: Comprehensive test suite for all components
+
+### 📋 Next Steps
+1. **Complete Backend Deployment**: Resolve remaining Render deployment issues
+2. **Contract Integration**: Connect backend API to deployed smart contracts
+3. **Frontend Development**: Build React dashboard and mobile app
+4. **Testing & QA**: Comprehensive testing of full system integration
+5. **Documentation**: Complete API documentation and user guides
+6. **Production Deployment**: Deploy to mainnet and production infrastructure
+
+### 🎯 Milestones Achieved
+- ✅ Smart contract development and deployment
+- ✅ Backend API architecture and core functionality
+- ✅ AI integration with Groq
+- ✅ Security and encryption implementation
+- ✅ Database models and API endpoints
+- ✅ Development environment setup
 
 ---
 

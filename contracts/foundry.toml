@@ -60,7 +60,7 @@ testnet = { key = "${ETHERSCAN_API_KEY}", url = "https://api-testnet.etherscan.i
 mainnet = { key = "${ETHERSCAN_API_KEY}", url = "https://api.etherscan.io/" }
 
 # Hedera configuration
-[hedera]
+[profile.hedera]
 testnet = { key = "${HEDERA_PRIVATE_KEY}", account_id = "${HEDERA_ACCOUNT_ID}" }
 mainnet = { key = "${HEDERA_PRIVATE_KEY}", account_id = "${HEDERA_ACCOUNT_ID}" }
 
@@ -102,7 +102,7 @@ gas_reports = ["*"]
 gas_reports_ignore = ["test/", "script/", "lib/"]
 
 # Solidity configuration
-[solidity]
+[profile.solidity]
 version = "0.8.19"
 optimizer = { enabled = true, runs = 200 }
 via_ir = false
@@ -118,12 +118,12 @@ match_path = "test/**/*.sol"
 match_contract = "*Test*"
 
 # Script configuration
-[script]
+[profile.script]
 verbosity = 2
 match_path = "script/**/*.sol"
 match_contract = "*Script*"
 
 # Deployment configuration
-[deploy]
+[profile.deploy]
 testnet = { rpc_url = "https://testnet.hashio.io/api", private_key = "${HEDERA_PRIVATE_KEY}" }
 mainnet = { rpc_url = "https://mainnet.hashio.io/api", private_key = "${HEDERA_PRIVATE_KEY}" }
