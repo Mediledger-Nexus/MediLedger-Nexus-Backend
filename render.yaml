@@ -7,7 +7,8 @@ services:
     buildCommand: |
       python -m pip install --upgrade pip && \
       pip install pydantic-settings==2.0.3 && \
-      pip install -r requirements.txt
+      pip install -r requirements.txt && \
+      pip show pydantic-settings
     startCommand: |
       ./start.sh
     # Disable auto-detection
