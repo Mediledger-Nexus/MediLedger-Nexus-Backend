@@ -4,8 +4,15 @@ Main FastAPI application for MediLedger Nexus
 
 import logging
 import os
+import sys
 from contextlib import asynccontextmanager
 from typing import AsyncGenerator
+
+# Add the src directory to Python path for deployment compatibility
+current_dir = os.path.dirname(os.path.abspath(__file__))
+src_dir = os.path.dirname(current_dir)  # Go up one level from mediledger_nexus to src
+if src_dir not in sys.path:
+    sys.path.insert(0, src_dir)
 
 import uvicorn
 from fastapi import FastAPI, HTTPException
