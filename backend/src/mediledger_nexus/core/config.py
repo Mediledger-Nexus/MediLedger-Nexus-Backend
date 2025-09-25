@@ -8,10 +8,17 @@ from typing import List, Optional
 
 from pydantic import validator
 
+# Try to import BaseSettings from pydantic_settings first
 try:
     from pydantic_settings import BaseSettings
-except ImportError:
-    from pydantic import BaseSettings
+    print("Successfully imported BaseSettings from pydantic_settings")
+except ImportError as e:
+    print(f"Failed to import from pydantic_settings: {e}")
+    # This should not happen with pydantic 2.11.9, but just in case
+    raise ImportError(
+        "pydantic-settings package is required but not installed. "
+        "Please install it with: pip install pydantic-settings"
+    ) from e
 
 
 class Settings(BaseSettings):
