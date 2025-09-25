@@ -8,7 +8,9 @@ services:
       python -m pip install --upgrade pip && \
       pip install -r requirements.txt
     startCommand: |
-      gunicorn wsgi:application --bind 0.0.0.0:$PORT --workers 1 --worker-class uvicorn.workers.UvicornWorker
+      ./start.sh
+    # Disable auto-detection
+    autoDeploy: true
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
