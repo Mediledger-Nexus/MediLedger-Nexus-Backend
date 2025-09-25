@@ -13,7 +13,7 @@ from passlib.context import CryptContext
 from ...core.config import get_settings
 from ...core.database import get_async_session
 from ...core.logging import get_logger
-from mediledger_nexus.models import User
+from ...models import User
 from ...schemas.auth import Token, UserCreate, UserResponse
 from ...utils.validators import DataValidator
 from ...utils.formatters import DataFormatter

@@ -9,7 +9,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from mediledger_nexus.core.database import get_async_session
 from mediledger_nexus.core.logging import get_logger
-from mediledger_nexus.models import User
+from ...models import User
 from mediledger_nexus.schemas.research import (
     ResearchDatasetRequest,
     ResearchDatasetResponse,
