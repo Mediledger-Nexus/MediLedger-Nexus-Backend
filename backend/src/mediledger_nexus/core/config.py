@@ -45,12 +45,12 @@ class Settings(BaseSettings):
     RELOAD: bool = False
     
     # Security
-    SECRET_KEY: str
+    SECRET_KEY: str = "default-secret-key-change-in-production"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
     ALGORITHM: str = "HS256"
     
     # Database Configuration
-    DATABASE_URL: str
+    DATABASE_URL: str = "sqlite:///./mediledger_nexus.db"
     DATABASE_ECHO: bool = False
     
     # Redis Configuration
@@ -58,15 +58,15 @@ class Settings(BaseSettings):
     
     # Hedera Configuration
     HEDERA_NETWORK: str = "testnet"
-    HEDERA_ACCOUNT_ID: str
-    HEDERA_PRIVATE_KEY: str
-    HEDERA_PUBLIC_KEY: str
+    HEDERA_ACCOUNT_ID: str = "0.0.0"
+    HEDERA_PRIVATE_KEY: str = "default-private-key"
+    HEDERA_PUBLIC_KEY: str = "default-public-key"
     
     # HCS Configuration
-    HCS_TOPIC_ID: str
+    HCS_TOPIC_ID: str = "0.0.0"
     
     # HTS Configuration
-    HEAL_TOKEN_ID: str
+    HEAL_TOKEN_ID: str = "0.0.0"
     
     # IPFS Configuration
     IPFS_NODE_URL: str = "http://localhost:5001"
@@ -77,7 +77,7 @@ class Settings(BaseSettings):
     ARWEAVE_WALLET_PATH: str = "./arweave-wallet.json"
     
     # Encryption Configuration
-    ENCRYPTION_KEY: str
+    ENCRYPTION_KEY: str = "default-encryption-key-change-in-production"
     ZK_SNARK_PROVING_KEY_PATH: str = "./zk/proving_key.json"
     ZK_SNARK_VERIFICATION_KEY_PATH: str = "./zk/verification_key.json"
     
