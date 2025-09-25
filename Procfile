@@ -1,1 +1,1 @@
-web: gunicorn app:application --bind 0.0.0.0:$PORT --workers 1 --worker-class uvicorn.workers.UvicornWorker
+web: gunicorn wsgi:application --bind 0.0.0.0:$PORT --workers 1 --worker-class uvicorn.workers.UvicornWorker

@@ -9,10 +9,32 @@ import sys
 
 # Add the backend/src directory to Python path
 backend_src_path = os.path.join(os.path.dirname(__file__), 'backend', 'src')
-sys.path.insert(0, backend_src_path)
+if backend_src_path not in sys.path:
+    sys.path.insert(0, backend_src_path)
 
-# Import the FastAPI app
-from mediledger_nexus.main import app
+# Also add the backend directory for package imports
+backend_path = os.path.join(os.path.dirname(__file__), 'backend')
+if backend_path not in sys.path:
+    sys.path.insert(0, backend_path)
+
+try:
+    # Import the FastAPI app
+    from mediledger_nexus.main import app
+except ImportError as e:
+    print(f"Import error: {e}")
+    print(f"Python path: {sys.path}")
+    print(f"Current working directory: {os.getcwd()}")
+    print(f"Backend src path: {backend_src_path}")
+    print(f"Backend path exists: {os.path.exists(backend_path)}")
+    print(f"Backend src path exists: {os.path.exists(backend_src_path)}")
+    
+    # List contents of backend directory
+    if os.path.exists(backend_path):
+        print(f"Backend directory contents: {os.listdir(backend_path)}")
+    if os.path.exists(backend_src_path):
+        print(f"Backend src directory contents: {os.listdir(backend_src_path)}")
+    
+    raise
 
 # Export the app for deployment platforms
 application = app

@@ -3,11 +3,11 @@
 # MediLedger Nexus Backend Startup Script
 # This script sets up the Python path and starts the FastAPI application
 
-# Change to the backend directory
-cd "$(dirname "$0")"
+# Change to the project root directory (parent of backend)
+cd "$(dirname "$0")/.."
 
-# Set the Python path to include the src directory
-export PYTHONPATH="$(pwd)/src:${PYTHONPATH}"
+# Set the Python path to include the backend/src directory
+export PYTHONPATH="$(pwd)/backend/src:${PYTHONPATH}"
 
-# Start the FastAPI application
-exec uvicorn mediledger_nexus.main:app --host 0.0.0.0 --port ${PORT:-8000} --workers 1
+# Start the FastAPI application using gunicorn with WSGI
+exec gunicorn wsgi:application --bind 0.0.0.0:${PORT:-8000} --workers 1 --worker-class uvicorn.workers.UvicornWorker

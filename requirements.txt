@@ -24,6 +24,9 @@ aiofiles>=23.2.1
 # Environment & Configuration
 python-dotenv>=1.0.0
 
+# Logging
+python-json-logger>=2.0.7
+
 # Production server
 gunicorn>=21.2.0
 
